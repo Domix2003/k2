@@ -119,6 +119,7 @@ public class ProductModel {
 		PreparedStatement preparedStatement = null;
 		PreparedStatement preparedStatement2 = null;
 
+		
 		Collection<ProductBean> products = new LinkedList<ProductBean>();
 
 		String selectSQL = "SELECT * FROM " + ProductModel.TABLE_NAME + " WHERE deleted = 'false' AND nomeTipologia = ?";
