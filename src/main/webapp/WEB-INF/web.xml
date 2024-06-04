@@ -38,5 +38,5 @@
     <error-page>
         <error-code>500</error-code>
         <location>/errore500/errore500.html</location>
-    </error-page>
+    </error-page> 
 </web-app>
