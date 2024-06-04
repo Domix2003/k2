@@ -126,8 +126,9 @@ public class ProductModel {
 		String sql2 = "SELECT AVG(votazione) FROM Recensione WHERE codiceProdotto = ?";
 		
 		try {
+			 connection = DriverManagerConnectionPool.getConnection();
 			 preparedStatement = connection.prepareStatement(selectSQL);
-			 preparedStatement.setString(1, where); // Safely set the 'where' parameter
+			 preparedStatement.setString(1, where); 
 			 ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {

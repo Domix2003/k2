@@ -3,6 +3,7 @@ package control;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class Vendita extends HttpServlet {
 		                }
 		                else {
 		                	if (item.getFieldName().compareTo("nome") == 0) {
-		                		product.setNome(item.getString());
+		                		product.setNome(sanitizeInput(item.getString()));
 		                	}
 		                	else if (item.getFieldName().compareTo("prezzo") == 0) {
 		                		product.setPrezzo(Double.parseDouble(item.getString()));
@@ -75,7 +76,7 @@ public class Vendita extends HttpServlet {
 								product.setTag(item.getString());
 							}
 							else if (item.getFieldName().compareTo("descrizione") == 0) {
-		                		product.setDescrizione(item.getString());
+		                		product.setDescrizione(sanitizeInput(item.getString()));
 		                	}
 		                }
 		            }
@@ -111,6 +112,22 @@ public class Vendita extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	
 	}
+    private String sanitizeInput(String input) {
+        if (input == null) {
+            return null;
+        }
+        
+        // Replace special characters with their HTML entities
+        String sanitized = input;
+        sanitized = sanitized.replaceAll("&", "&amp;");
+        sanitized = sanitized.replaceAll("<", "&lt;");
+        sanitized = sanitized.replaceAll(">", "&gt;");
+        sanitized = sanitized.replaceAll("\"", "&quot;");
+        sanitized = sanitized.replaceAll("'", "&#x27;");
+        sanitized = sanitized.replaceAll("/", "&#x2F;");
 
+        return sanitized;
+    }
 }
